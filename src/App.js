@@ -6,8 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Board /> 
-        <Board /> 
+        <Board {...this.props} /> 
       </div>
     );
   }
