@@ -16,10 +16,10 @@ export function shuffleNumbers () {
   };
 }
 
-export function placeNumber (number, destination) {
+export function placeNumber (index, destination) {
   return {
     type: PLACE_NUMBER,
-    number,
+    index,
     destination
   };
 }

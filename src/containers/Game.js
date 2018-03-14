@@ -5,14 +5,14 @@ import * as numberActionCreators from '../actions/numbers';
 import App from '../App';
 
 const mapStateToProps = state => ({
-  numbers: state.numbers.present,
+  numberData: state.numbers.present,
   canUndo: !state.numbers.past.length,
   canRedo: !state.numbers.future.length
 });
 
 const mapDispatchToProps = dispatch => {
   let allActionCreators = Object.assign({},
-                                        numberActionCreators);
+    numberActionCreators);
   return bindActionCreators(allActionCreators, dispatch);
 };
 

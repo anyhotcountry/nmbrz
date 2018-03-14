@@ -6,11 +6,9 @@ import undoable, { includeAction } from 'redux-undo';
 // Cards state is an array of 52 objects of form {name, location}
 function makeStack() {
     let stack = [];
-    for (let index = 0; index < 10; index++) {
-        stack.push({ name: 'nmbr' + index, placed: false, active: false });
-        stack.push({ name: 'nmbr' + index, placed: false, active: false });
+    for (let i = 0; i < 20; i++) {
+        stack.push({ name: 'nmbr' + Math.floor(i / 2), placed: false, active: false });
     }
-    stack[0].placed = true;
     return stack;
 }
 
@@ -21,19 +19,19 @@ function shuffle(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+    array[0].active = true;
     return array;
 }
 
 function numbers(state = initialState, action) {
     switch (action.type) {
         case SHUFFLE_NUMBERS:
-            return shuffle(initialState);
+            return shuffle(makeStack());
         case PLACE_NUMBER: {
-            let newIndex = state.findIndex(n => n.active);
             return state.map((number, i) => ({
                     name: number.name,
-                    placed: number.active,
-                    active: newIndex !== -1 && i === newIndex + 1
+                    placed: i === action.index,
+                    active: i === (action.index + 1)
                 }));
         }
         default:
@@ -43,7 +41,7 @@ function numbers(state = initialState, action) {
 
 let undoConfig = {
     filter: includeAction([PLACE_NUMBER]),
-    limit: 20,
+    limit: 50,
     undoType: UNDO_MOVE,
     redoType: REDO_MOVE,
     clearHistoryType: CLEAR_UNDO_HISTORY

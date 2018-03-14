@@ -4,15 +4,13 @@ import Draggable from 'react-draggable';
 const size = 25;
 const strokeWidth = 2;
 
-const Number = (props) => (
+const Number = ({ placeNumber, data, fill, index }) => (
     <Draggable
         axis="both"
-        defaultPosition={{ x: 0, y: 0 }}
-        position={null}
-        grid={[size, size]}>
+        grid={[size, size]} onStop={(e, o) => placeNumber && placeNumber(index, {x : o.x, y : o.y})}>
         <svg width={3 * size} height={4 * size} >
-            {props.data.map(function (c, index) {
-                return <rect width={size} height={size} x={size * c.x} y={size * c.y} stroke="black" fill={props.fill} stroke-width={strokeWidth} />;
+            {data.map(function (c, index) {
+                return <rect width={size} height={size} x={size * c.x} y={size * c.y} stroke="black" fill={fill} stroke-width={strokeWidth} />;
             })}
         </svg>
     </Draggable>
