@@ -1,19 +1,16 @@
 import React from 'react';
-import Draggable from 'react-draggable';
 
-const size = 25;
+export const SIZE = 25;
+export const HEIGHT = 4 * SIZE;
+export const WIDTH = 3 * SIZE;
 const strokeWidth = 2;
 
-const Number = ({ placeNumber, data, fill, index }) => (
-    <Draggable
-        axis="both"
-        grid={[size, size]} onStop={(e, o) => placeNumber && placeNumber(index, {x : o.x, y : o.y})}>
-        <svg width={3 * size} height={4 * size} >
-            {data.map(function (c, index) {
-                return <rect width={size} height={size} x={size * c.x} y={size * c.y} stroke="black" fill={fill} stroke-width={strokeWidth} />;
-            })}
-        </svg>
-    </Draggable>
+export const Number = ({ data, fill }) => (
+    <svg width={WIDTH} height={HEIGHT} >
+        {data.map(function (c, index) {
+            return <rect width={SIZE} height={SIZE} x={SIZE * c.x} y={SIZE * c.y} stroke="black" fill={fill} stroke-width={strokeWidth} />;
+        })}
+    </svg>
 );
 
 export default Number;

@@ -1,4 +1,4 @@
-import { PLACE_NUMBER, SHUFFLE_NUMBERS, UNDO_MOVE, REDO_MOVE, CLEAR_UNDO_HISTORY } from '../actions/numbers';
+import { DRAG_STOP, PLACE_NUMBER, SHUFFLE_NUMBERS, UNDO_MOVE, REDO_MOVE, CLEAR_UNDO_HISTORY } from '../actions/numbers';
 
 /* Undoable setup */
 import undoable, { includeAction } from 'redux-undo';
@@ -7,7 +7,7 @@ import undoable, { includeAction } from 'redux-undo';
 function makeStack() {
     let stack = [];
     for (let i = 0; i < 20; i++) {
-        stack.push({ name: 'nmbr' + Math.floor(i / 2), placed: false, active: false });
+        stack.push({ name: 'nmbr' + Math.floor(i / 2), placed: false, active: false, destination: { x: 0, y: 0 } });
     }
     return stack;
 }
@@ -28,11 +28,28 @@ function numbers(state = initialState, action) {
         case SHUFFLE_NUMBERS:
             return shuffle(makeStack());
         case PLACE_NUMBER: {
-            return state.map((number, i) => ({
-                    name: number.name,
-                    placed: i === action.index,
-                    active: i === (action.index + 1)
-                }));
+            let index = state.findIndex(n => n.active);
+            if (index === -1) {
+                return state;
+            }
+            return state.map((n, i) => ({
+                name: n.name,
+                placed: i <= index,
+                active: i === index + 1,
+                destination: n.destination
+            }));
+        }
+        case DRAG_STOP: {
+            let index = state.findIndex(n => n.active);
+            if (index === -1) {
+                return state;
+            }
+            return state.map((n, i) => ({
+                name: n.name,
+                placed: n.placed,
+                active: n.active,
+                destination: i === index ? { x: n.destination.x + action.deltaX, y: n.destination.y + action.deltaY } : n.destination
+            }));
         }
         default:
             return state;

@@ -1,4 +1,5 @@
 export const PLACE_NUMBER = 'PLACE_NUMBER';
+export const DRAG_STOP = 'DRAG_STOP';
 export const SHUFFLE_NUMBERS = 'SHUFFLE_NUMBERS';
 export const UNDO_MOVE = 'UNDO_MOVE';
 export const REDO_MOVE = 'REDO_MOVE';
@@ -16,11 +17,17 @@ export function shuffleNumbers () {
   };
 }
 
-export function placeNumber (index, destination) {
+export function placeNumber () {
   return {
-    type: PLACE_NUMBER,
-    index,
-    destination
+    type: PLACE_NUMBER
+  };
+}
+
+export function onStop (deltaX, deltaY) {
+  return {
+    type: DRAG_STOP,
+    deltaX,
+    deltaY
   };
 }
 

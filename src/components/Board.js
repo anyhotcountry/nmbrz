@@ -1,16 +1,25 @@
 import React from 'react';
-import Number from './Number'
+import DraggableNumber from './DraggableNumber'
+import PlacedNumber from './PlacedNumber'
 import numbers from './numbers';
 
-const Board = ({ numberData, placeNumber, shuffleNumbers }) => (
+const Board = ({ numberData, onStop, placeNumber, rotateNumber, shuffleNumbers }) => (
     <React.Fragment>
         <div>
             <button onClick={shuffleNumbers} >
                 Shuffle
             </button>
+            <button onClick={placeNumber} >
+                Next
+            </button>
+            <button onClick={rotateNumber} >
+                Rotate
+            </button>
         </div>
-        {numberData.filter(n => n.active).map((n, i) => (<Number data={numbers[n.name].points} fill={numbers[n.name].colour} index={i} placeNumber={placeNumber} />))}
-        {numberData.filter(n => n.placed).map((n, i) => (<Number data={numbers[n.name].points} fill={numbers[n.name].colour} index={i} placeNumber={placeNumber} />))}
+        <div>
+            {numberData.filter(n => n.placed).map(n => (<PlacedNumber data={numbers[n.name].points} fill={numbers[n.name].colour} destination={n.destination} />))}
+            {numberData.filter(n => n.active).map(n => (<DraggableNumber data={numbers[n.name].points} fill={numbers[n.name].colour} onStop={onStop} destination={n.destination} />))}
+        </div>
     </React.Fragment>
 );
 
