@@ -15,6 +15,9 @@ class Draggable extends React.Component {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
         this.onMouseUp = this.onMouseUp.bind(this);
+        this.onTouchStart = this.onTouchStart.bind(this);
+        this.onTouchMove = this.onTouchMove.bind(this);
+        this.onTouchEnd = this.onTouchEnd.bind(this);
     }
 
     onMouseDown(e) {
@@ -29,6 +32,19 @@ class Draggable extends React.Component {
         document.addEventListener('mousemove', this.onMouseMove);
         document.addEventListener('mouseup', this.onMouseUp);
         e.preventDefault();
+    }
+
+    onTouchStart(e) {
+        const ref = ReactDOM.findDOMNode(this.handle);
+        const body = document.body;
+        const box = ref.getBoundingClientRect();
+        const touchobj = e.changedTouches[0];
+        this.setState({
+            relX: touchobj.pageX - (box.left + body.scrollLeft - body.clientLeft),
+            relY: touchobj.pageY - (box.top + body.scrollTop - body.clientTop)
+        });
+        document.addEventListener('touchmove', this.onTouchMove);
+        document.addEventListener('touchend', this.onTouchEnd);
     }
 
     onMouseUp(e) {
@@ -50,10 +66,28 @@ class Draggable extends React.Component {
         e.preventDefault();
     }
 
+    onTouchEnd(e) {
+        document.removeEventListener('touchmove', this.onTouchMove);
+        document.removeEventListener('touchend', this.onTouchEnd);
+        this.props.onStop && this.props.onStop(this.state.x, this.state.y);
+    }
+
+    onTouchMove(e) {
+        const touchobj = e.changedTouches[0];
+        const x = Math.trunc((touchobj.pageX - this.state.relX) / this.gridX) * this.gridX;
+        const y = Math.trunc((touchobj.pageY - this.state.relY) / this.gridY) * this.gridY;
+        if (x !== this.state.x || y !== this.state.y) {
+            this.setState({
+                x,
+                y
+            });
+        }
+    }
+
     render() {
         return <div
             onMouseDown={this.onMouseDown}
-            onTouchStart={this.onMouseDown}
+            onTouchStart={this.onTouchStart}
             style={{
                 position: 'absolute',
                 left: this.state.x,
