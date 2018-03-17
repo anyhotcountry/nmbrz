@@ -1,4 +1,4 @@
-import { DRAG_STOP, PLACE_NUMBER, SHUFFLE_NUMBERS, UNDO_MOVE, REDO_MOVE, CLEAR_UNDO_HISTORY } from '../actions/numbers';
+import { DRAG_STOP, PLACE_NUMBER, ROTATE_NUMBER, SHUFFLE_NUMBERS, UNDO_MOVE, REDO_MOVE, CLEAR_UNDO_HISTORY } from '../actions/numbers';
 
 /* Undoable setup */
 import undoable, { includeAction } from 'redux-undo';
@@ -7,7 +7,7 @@ import undoable, { includeAction } from 'redux-undo';
 function makeStack() {
     let stack = [];
     for (let i = 0; i < 20; i++) {
-        stack.push({ name: 'nmbr' + Math.floor(i / 2), placed: false, active: false, destination: { x: 0, y: 0 } });
+        stack.push({ key: i, name: 'nmbr' + Math.floor(i / 2), placed: false, active: false, destination: { x: 0, y: 0 }, rotation: 0 });
     }
     return stack;
 }
@@ -33,10 +33,26 @@ function numbers(state = initialState, action) {
                 return state;
             }
             return state.map((n, i) => ({
+                key: n.key,
                 name: n.name,
                 placed: i <= index,
                 active: i === index + 1,
-                destination: n.destination
+                destination: n.destination,
+                rotation: n.rotation
+            }));
+        }
+        case ROTATE_NUMBER: {
+            let index = state.findIndex(n => n.active);
+            if (index === -1) {
+                return state;
+            }
+            return state.map((n, i) => ({
+                key: n.key,
+                name: n.name,
+                placed: n.placed,
+                active: n.active,
+                destination: n.destination,
+                rotation: i === index ? n.rotation + 0.5 * Math.PI : n.rotation
             }));
         }
         case DRAG_STOP: {
@@ -45,10 +61,12 @@ function numbers(state = initialState, action) {
                 return state;
             }
             return state.map((n, i) => ({
+                key: n.key,
                 name: n.name,
                 placed: n.placed,
                 active: n.active,
-                destination: i === index ? { x: n.destination.x + action.deltaX, y: n.destination.y + action.deltaY } : n.destination
+                destination: i === index ? { x: action.x, y: action.y } : n.destination,
+                rotation: n.rotation
             }));
         }
         default:

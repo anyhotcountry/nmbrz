@@ -7,8 +7,8 @@ class Draggable extends React.Component {
         this.state = {
             relX: 0,
             relY: 0,
-            x: 0,
-            y: 0,
+            x: props.x,
+            y: props.y
         };
         this.gridX = props.grid ? props.grid[0] : 1;
         this.gridY = props.grid ? props.grid[1] : 1;
@@ -57,7 +57,7 @@ class Draggable extends React.Component {
     render() {
         return <div
             onMouseDown={this.onMouseDown}
-            onTouchDown={this.onMouseDown}
+            onTouchStart={this.onMouseDown}
             style={{
                 position: 'absolute',
                 left: this.state.x,

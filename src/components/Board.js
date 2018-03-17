@@ -17,8 +17,8 @@ const Board = ({ numberData, onStop, placeNumber, rotateNumber, shuffleNumbers }
             </button>
         </div>
         <div>
-            {numberData.filter(n => n.placed).map(n => (<PlacedNumber data={numbers[n.name].points} fill={numbers[n.name].colour} destination={n.destination} />))}
-            {numberData.filter(n => n.active).map(n => (<DraggableNumber data={numbers[n.name].points} fill={numbers[n.name].colour} onStop={onStop} destination={n.destination} />))}
+            {numberData.filter(n => n.placed).map(n => (<PlacedNumber key={n.key} data={numbers[n.name].points} fill={numbers[n.name].colour} destination={n.destination} rotation={n.rotation} />))}
+            {numberData.filter(n => n.active).map(n => (<DraggableNumber key={n.key} data={numbers[n.name].points} fill={numbers[n.name].colour} onStop={onStop} destination={n.destination} rotation={n.rotation} />))}
         </div>
     </React.Fragment>
 );

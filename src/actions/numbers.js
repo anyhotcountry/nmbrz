@@ -1,4 +1,5 @@
 export const PLACE_NUMBER = 'PLACE_NUMBER';
+export const ROTATE_NUMBER = 'ROTATE_NUMBER';
 export const DRAG_STOP = 'DRAG_STOP';
 export const SHUFFLE_NUMBERS = 'SHUFFLE_NUMBERS';
 export const UNDO_MOVE = 'UNDO_MOVE';
@@ -23,11 +24,17 @@ export function placeNumber () {
   };
 }
 
-export function onStop (deltaX, deltaY) {
+export function rotateNumber () {
+  return {
+    type: ROTATE_NUMBER
+  };
+}
+
+export function onStop (x, y) {
   return {
     type: DRAG_STOP,
-    deltaX,
-    deltaY
+    x,
+    y
   };
 }
 
