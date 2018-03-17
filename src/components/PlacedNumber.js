@@ -1,10 +1,10 @@
 import React from 'react';
-import { Number, HEIGHT, WIDTH } from './Number';
+import Number, { HEIGHT, WIDTH } from './Number';
 
-const PlacedNumber = ({ data, fill, destination, rotation }) => {
+const PlacedNumber = ({ name, destination, rotation }) => {
     let style = { position: 'absolute', width: WIDTH + 'px', height: HEIGHT + 'px', top: destination.y + 'px', left: destination.x + 'px' };
     return <div style={style}>
-        <Number data={data} fill={fill} rotation={rotation} />
+        <Number name={name} rotation={rotation} />
     </div>
 };
 

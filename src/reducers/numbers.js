@@ -33,12 +33,9 @@ function numbers(state = initialState, action) {
                 return state;
             }
             return state.map((n, i) => ({
-                key: n.key,
-                name: n.name,
+                ...n,
                 placed: i <= index,
                 active: i === index + 1,
-                destination: n.destination,
-                rotation: n.rotation
             }));
         }
         case ROTATE_NUMBER: {
@@ -47,11 +44,7 @@ function numbers(state = initialState, action) {
                 return state;
             }
             return state.map((n, i) => ({
-                key: n.key,
-                name: n.name,
-                placed: n.placed,
-                active: n.active,
-                destination: n.destination,
+                ...n,
                 rotation: i === index ? n.rotation + 0.5 * Math.PI : n.rotation
             }));
         }
@@ -61,12 +54,8 @@ function numbers(state = initialState, action) {
                 return state;
             }
             return state.map((n, i) => ({
-                key: n.key,
-                name: n.name,
-                placed: n.placed,
-                active: n.active,
+                ...n,
                 destination: i === index ? { x: action.x, y: action.y } : n.destination,
-                rotation: n.rotation
             }));
         }
         default:

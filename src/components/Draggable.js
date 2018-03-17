@@ -24,9 +24,7 @@ class Draggable extends React.Component {
         const box = ref.getBoundingClientRect();
         this.setState({
             relX: e.pageX - (box.left + body.scrollLeft - body.clientLeft),
-            relY: e.pageY - (box.top + body.scrollTop - body.clientTop),
-            x: this.state.x,
-            y: this.state.y
+            relY: e.pageY - (box.top + body.scrollTop - body.clientTop)
         });
         document.addEventListener('mousemove', this.onMouseMove);
         document.addEventListener('mouseup', this.onMouseUp);
@@ -45,8 +43,6 @@ class Draggable extends React.Component {
         const y = Math.trunc((e.pageY - this.state.relY) / this.gridY) * this.gridY;
         if (x !== this.state.x || y !== this.state.y) {
             this.setState({
-                relX: this.state.relX,
-                relY: this.state.relY,
                 x,
                 y
             });
@@ -64,7 +60,9 @@ class Draggable extends React.Component {
                 top: this.state.y
             }}
             ref={(div) => { this.handle = div; }}
-        >{this.props.children}</div>;
+        >
+            {this.props.children}
+        </div>;
     }
 }
 

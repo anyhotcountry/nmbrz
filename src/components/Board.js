@@ -1,7 +1,6 @@
 import React from 'react';
 import DraggableNumber from './DraggableNumber'
 import PlacedNumber from './PlacedNumber'
-import numbers from './numbers';
 
 const Board = ({ numberData, onStop, placeNumber, rotateNumber, shuffleNumbers }) => (
     <React.Fragment>
@@ -17,8 +16,8 @@ const Board = ({ numberData, onStop, placeNumber, rotateNumber, shuffleNumbers }
             </button>
         </div>
         <div>
-            {numberData.filter(n => n.placed).map(n => (<PlacedNumber key={n.key} data={numbers[n.name].points} fill={numbers[n.name].colour} destination={n.destination} rotation={n.rotation} />))}
-            {numberData.filter(n => n.active).map(n => (<DraggableNumber key={n.key} data={numbers[n.name].points} fill={numbers[n.name].colour} onStop={onStop} destination={n.destination} rotation={n.rotation} />))}
+            {numberData.filter(n => n.placed).map(n => (<PlacedNumber key={n.key} name={n.name} destination={n.destination} rotation={n.rotation} />))}
+            {numberData.filter(n => n.active).map(n => (<DraggableNumber key={n.key} name={n.name} onStop={onStop} destination={n.destination} rotation={n.rotation} />))}
         </div>
     </React.Fragment>
 );
