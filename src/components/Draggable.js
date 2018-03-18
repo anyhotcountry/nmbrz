@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 class Draggable extends React.Component {
     constructor(props) {
@@ -19,6 +20,13 @@ class Draggable extends React.Component {
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
     }
+
+    static propTypes = {
+        onMove: PropTypes.func,
+        onStop: PropTypes.func,
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired
+    }; 
 
     onStart(e) {
         const ref = ReactDOM.findDOMNode(this.handle);
@@ -63,19 +71,22 @@ class Draggable extends React.Component {
     }
 
     onTouchStart(e) {
-        this.onStart(e.changedTouches[0]);
-        document.addEventListener('touchmove', this.onTouchMove);
-        document.addEventListener('touchend', this.onTouchEnd);
+        this.onStart(e.touches[0]);
+        document.addEventListener('touchmove', this.onTouchMove, {passive: false});
+        document.addEventListener('touchend', this.onTouchEnd, {passive: false});
+        e.preventDefault();
     }
 
     onTouchMove(e) {
-        this.onMove(e.changedTouches[0]);
+        this.onMove(e.touches[0]);
+        e.preventDefault();
     }
 
     onTouchEnd(e) {
         document.removeEventListener('touchmove', this.onTouchMove);
         document.removeEventListener('touchend', this.onTouchEnd);
         this.props.onStop && this.props.onStop(this.state.x, this.state.y);
+        e.preventDefault();
     }
 
     render() {
@@ -85,7 +96,8 @@ class Draggable extends React.Component {
             style={{
                 position: 'absolute',
                 left: this.state.x,
-                top: this.state.y
+                top: this.state.y,
+                touchAction: 'none'
             }}
             ref={(div) => { this.handle = div; }}
         >
