@@ -4,9 +4,9 @@ import DraggableNumber from './DraggableNumber'
 import PlacedNumber from './PlacedNumber'
 
 const Board = (props) => {
-    const { numberData, onStop, placeNumber, rotateNumber, shuffleNumbers } = props;
+    const { numberData, onStop, placeNumber, rotateNumber, shuffleNumbers, undoMove, redoMove } = props;
     return <React.Fragment>
-        <div>
+        <div style={{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
             <button onClick={shuffleNumbers} >
                 Shuffle
             </button>
@@ -15,6 +15,12 @@ const Board = (props) => {
             </button>
             <button onClick={rotateNumber} >
                 Rotate
+            </button>
+            <button onClick={undoMove} >
+                Undo
+            </button>
+            <button onClick={redoMove} >
+                Redo
             </button>
         </div>
         <div>
@@ -26,6 +32,8 @@ const Board = (props) => {
 
 Board.propTypes = {
     onStop: PropTypes.func.isRequired,
+    undoMove: PropTypes.func,
+    redoMove: PropTypes.func,
     placeNumber: PropTypes.func.isRequired,
     rotateNumber: PropTypes.func.isRequired,
     shuffleNumbers: PropTypes.func.isRequired,

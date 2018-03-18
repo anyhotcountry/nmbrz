@@ -11,8 +11,8 @@ class Draggable extends React.Component {
             x: props.x,
             y: props.y
         };
-        this.gridX = props.grid ? props.grid[0] : 1;
-        this.gridY = props.grid ? props.grid[1] : 1;
+        this.gridX = props.gridX || 1;
+        this.gridY = props.gridY || 1;
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
         this.onMouseUp = this.onMouseUp.bind(this);
@@ -25,7 +25,9 @@ class Draggable extends React.Component {
         onMove: PropTypes.func,
         onStop: PropTypes.func,
         x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired
+        y: PropTypes.number.isRequired,
+        gridX: PropTypes.number,
+        gridY: PropTypes.number
     }; 
 
     onStart(e) {

@@ -6,7 +6,7 @@ import Number, { SIZE } from './Number';
 const DraggableNumber = (props) => {
     const { onStop, name, destination, rotation } = props;
     return <Draggable
-        grid={[SIZE, SIZE]} onStop={onStop} x={destination.x} y={destination.y}>
+        gridX={SIZE} gridY={SIZE} onStop={onStop} x={destination.x} y={destination.y}>
         <Number name={name} rotation={rotation} />
     </Draggable>
 };
