@@ -14,7 +14,8 @@ export function clearHistory () {
 
 export function shuffleNumbers () {
   return {
-    type: SHUFFLE_NUMBERS
+    type: SHUFFLE_NUMBERS,
+    sequence: new Array(20).map((x, i) => ({i, r: Math.random()})).sort(x => x.r).map(x => x.i)
   };
 }
 

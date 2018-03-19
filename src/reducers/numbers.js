@@ -14,19 +14,16 @@ function makeStack() {
 
 const initialState = makeStack();
 
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    array[0].active = true;
-    return array;
+function shuffle(unshuffled, sequence) {
+    const shuffled = sequence.map(i => unshuffled[i]);
+    shuffled[0].active = true;
+    return shuffled;
 }
 
 function numbers(state = initialState, action) {
     switch (action.type) {
         case SHUFFLE_NUMBERS:
-            return shuffle(makeStack());
+            return shuffle(state, action.sequence);
         case PLACE_NUMBER: {
             let index = state.findIndex(n => n.active);
             if (index === -1) {
