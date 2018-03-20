@@ -4,22 +4,22 @@ import DraggableNumber from './DraggableNumber'
 import PlacedNumber from './PlacedNumber'
 
 const Board = (props) => {
-    const { numberData, onStop, placeNumber, rotateNumber, shuffleNumbers, undoMove, redoMove } = props;
+    const { numberData, canUndo, canRedo, onStop, placeNumber, rotateNumber, shuffleNumbers, undoMove, redoMove } = props;
     return <React.Fragment>
         <div style={{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
             <button onClick={shuffleNumbers} >
                 Shuffle
             </button>
-            <button onClick={placeNumber} >
-                Next
+            <button onClick={placeNumber} disabled={numberData.every(n => !n.active)} >
+                Next 
             </button>
-            <button onClick={rotateNumber} >
+            <button onClick={rotateNumber} disabled={numberData.every(n => n.placed)}  >
                 Rotate
             </button>
-            <button onClick={undoMove} >
+            <button onClick={undoMove} disabled={!canUndo} >
                 Undo
             </button>
-            <button onClick={redoMove} >
+            <button onClick={redoMove} disabled={!canRedo} >
                 Redo
             </button>
         </div>
@@ -48,6 +48,8 @@ Board.propTypes = {
         }).isRequired,
         rotation: PropTypes.number.isRequired
     })).isRequired,
+    canUndo: PropTypes.bool.isRequired,
+    canRedo: PropTypes.bool.isRequired
 };
 
 export default Board;

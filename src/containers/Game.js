@@ -6,8 +6,8 @@ import App from '../App';
 
 const mapStateToProps = state => ({
   numberData: state.numbers.present,
-  canUndo: !state.numbers.past.length,
-  canRedo: !state.numbers.future.length
+  canUndo: state.numbers.past.length > 0,
+  canRedo: state.numbers.future.length > 0
 });
 
 const mapDispatchToProps = dispatch => {
