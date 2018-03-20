@@ -5,33 +5,36 @@ export const SHUFFLE_NUMBERS = 'SHUFFLE_NUMBERS';
 export const UNDO_MOVE = 'UNDO_MOVE';
 export const REDO_MOVE = 'REDO_MOVE';
 export const CLEAR_UNDO_HISTORY = 'CLEAR_UNDO_HISTORY';
+export const SIZE = 20;
 
-export function clearHistory () {
-  return {
-    type: CLEAR_UNDO_HISTORY
-  };
+const randomSequence = (n) => {
+  const sequence = [];
+  for (let index = 0; index < n; index++) {
+    sequence.push({ index, random: Math.random() });
+  }
+  return sequence;
 }
 
-export function shuffleNumbers () {
+export const shuffleNumbers = () => {
   return {
     type: SHUFFLE_NUMBERS,
-    sequence: new Array(20).map((x, i) => ({i, r: Math.random()})).sort(x => x.r).map(x => x.i)
+    sequence: randomSequence(SIZE).sort(x => x.random).map(x => x.index)
   };
 }
 
-export function placeNumber () {
+export const placeNumber = () => {
   return {
     type: PLACE_NUMBER
   };
 }
 
-export function rotateNumber () {
+export const rotateNumber = () => {
   return {
     type: ROTATE_NUMBER
   };
 }
 
-export function onStop (x, y) {
+export const onStop = (x, y) => {
   return {
     type: DRAG_STOP,
     x,
@@ -39,14 +42,20 @@ export function onStop (x, y) {
   };
 }
 
-export function undoMove () {
+export const undoMove = () => {
   return {
     type: UNDO_MOVE
   };
 }
 
-export function redoMove () {
+export const redoMove = () => {
   return {
     type: REDO_MOVE
+  };
+}
+
+export const clearHistory = () => {
+  return {
+    type: CLEAR_UNDO_HISTORY
   };
 }
