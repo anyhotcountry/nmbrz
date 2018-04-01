@@ -12,13 +12,13 @@ const randomSequence = (n) => {
   for (let index = 0; index < n; index++) {
     sequence.push({ index, random: Math.random() });
   }
-  return sequence;
+  return sequence.sort((a, b) => a.random - b.random).map(x => x.index);
 }
 
 export const shuffleNumbers = () => {
   return {
     type: SHUFFLE_NUMBERS,
-    sequence: randomSequence(SIZE).sort(x => x.random).map(x => x.index)
+    sequence: randomSequence(SIZE)
   };
 }
 

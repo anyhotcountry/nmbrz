@@ -13,7 +13,7 @@ const Board = (props) => {
             <button onClick={placeNumber} disabled={numberData.every(n => !n.active)} >
                 Next 
             </button>
-            <button onClick={rotateNumber} disabled={numberData.every(n => n.placed)}  >
+            <button onClick={rotateNumber} disabled={numberData.every(n => !n.active)}  >
                 Rotate
             </button>
             <button onClick={undoMove} disabled={!canUndo} >
