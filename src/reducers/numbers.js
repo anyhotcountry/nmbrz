@@ -32,7 +32,7 @@ export const numbers = (state = initialState, action) => {
             return state.map((n, i) => ({
                 ...n,
                 placed: i <= index,
-                active: i === index + 1,
+                active: i === index + 1
             }));
         }
         case ROTATE_NUMBER: {
@@ -53,6 +53,7 @@ export const numbers = (state = initialState, action) => {
             return state.map((n, i) => ({
                 ...n,
                 destination: i === index ? { x: action.x, y: action.y } : n.destination,
+                rotation: i === index && n.destination.x === action.x && n.destination.y === action.y ? n.rotation + 0.5 * Math.PI : n.rotation
             }));
         }
         default:
