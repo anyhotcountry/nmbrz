@@ -1,9 +1,5 @@
-import { DRAG_STOP, PLACE_NUMBER, ROTATE_NUMBER, SHUFFLE_NUMBERS, UNDO_MOVE, REDO_MOVE, CLEAR_UNDO_HISTORY, SIZE } from '../actions/numbers';
+import { DRAG_STOP, PLACE_NUMBER, ROTATE_NUMBER, NEW_GAME, SIZE } from '../actions/types';
 
-/* Undoable setup */
-import undoable, { includeAction } from 'redux-undo';
-
-// Cards state is an array of 52 objects of form {name, location}
 const makeStack = () => {
     let stack = [];
     for (let i = 0; i < SIZE; i++) {
@@ -22,7 +18,7 @@ const shuffle = (unshuffled, sequence) => {
 
 export const numbers = (state = initialState, action) => {
     switch (action.type) {
-        case SHUFFLE_NUMBERS:
+        case NEW_GAME:
             return shuffle(makeStack(), action.sequence);
         case PLACE_NUMBER: {
             let index = state.findIndex(n => n.active);
@@ -61,12 +57,4 @@ export const numbers = (state = initialState, action) => {
     }
 }
 
-const undoConfig = {
-    filter: includeAction([PLACE_NUMBER]),
-    limit: 50,
-    undoType: UNDO_MOVE,
-    redoType: REDO_MOVE,
-    clearHistoryType: CLEAR_UNDO_HISTORY
-};
-
-export default undoable(numbers, undoConfig);
+export default numbers;

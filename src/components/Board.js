@@ -3,24 +3,17 @@ import PropTypes from 'prop-types';
 import DraggableNumber from './DraggableNumber'
 import PlacedNumber from './PlacedNumber'
 
-const Board = (props) => {
-    const { numberData, canUndo, canRedo, onStop, placeNumber, rotateNumber, shuffleNumbers, undoMove, redoMove } = props;
+const Board = ({ numberData, onStop, placeNumber, rotateNumber, newGame }) => {
     return <React.Fragment>
         <div style={{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
-            <button onClick={shuffleNumbers} >
-                Shuffle
+            <button onClick={newGame} >
+                New Game
             </button>
             <button onClick={placeNumber} disabled={numberData.every(n => !n.active)} >
                 Next 
             </button>
             <button onClick={rotateNumber} disabled={numberData.every(n => !n.active)}  >
                 Rotate
-            </button>
-            <button onClick={undoMove} disabled={!canUndo} >
-                Undo
-            </button>
-            <button onClick={redoMove} disabled={!canRedo} >
-                Redo
             </button>
         </div>
         <div>
@@ -32,11 +25,9 @@ const Board = (props) => {
 
 Board.propTypes = {
     onStop: PropTypes.func.isRequired,
-    undoMove: PropTypes.func,
-    redoMove: PropTypes.func,
     placeNumber: PropTypes.func.isRequired,
     rotateNumber: PropTypes.func.isRequired,
-    shuffleNumbers: PropTypes.func.isRequired,
+    newGame: PropTypes.func.isRequired,
     numberData: PropTypes.arrayOf(PropTypes.shape({
         key: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
@@ -47,9 +38,7 @@ Board.propTypes = {
             y: PropTypes.number.isRequired
         }).isRequired,
         rotation: PropTypes.number.isRequired
-    })).isRequired,
-    canUndo: PropTypes.bool.isRequired,
-    canRedo: PropTypes.bool.isRequired
+    })).isRequired
 };
 
 export default Board;

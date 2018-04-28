@@ -5,9 +5,7 @@ import * as numberActionCreators from '../actions/numbers';
 import App from '../App';
 
 const mapStateToProps = state => ({
-  numberData: state.numbers.present,
-  canUndo: state.numbers.past.length > 0,
-  canRedo: state.numbers.future.length > 0
+  numberData: state.numbers
 });
 
 const mapDispatchToProps = dispatch => {
