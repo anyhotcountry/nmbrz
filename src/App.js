@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Board from './components/Board'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Board {...this.props} /> 
-      </div>
+      <MuiThemeProvider>
+        <Board {...this.props} />
+      </MuiThemeProvider>
     );
   }
 }

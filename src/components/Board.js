@@ -2,19 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DraggableNumber from './DraggableNumber'
 import PlacedNumber from './PlacedNumber'
+import RaisedButton from 'material-ui/RaisedButton';
 
 const Board = ({ numberData, onStop, placeNumber, rotateNumber, newGame }) => {
     return <React.Fragment>
         <div style={{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
-            <button onClick={newGame} >
-                New Game
-            </button>
-            <button onClick={placeNumber} disabled={numberData.every(n => !n.active)} >
-                Next 
-            </button>
-            <button onClick={rotateNumber} disabled={numberData.every(n => !n.active)}  >
-                Rotate
-            </button>
+            <RaisedButton label="New Game" onClick={newGame} />
+            <RaisedButton label="Next" onClick={placeNumber} disabled={numberData.every(n => !n.active)} />
+            <RaisedButton label="Rotate"  onClick={rotateNumber} disabled={numberData.every(n => !n.active)} />
         </div>
         <div>
             {numberData.filter(n => n.placed).map(n => (<PlacedNumber key={n.key} name={n.name} destination={n.destination} rotation={n.rotation} />))}

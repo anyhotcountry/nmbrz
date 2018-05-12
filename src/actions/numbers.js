@@ -14,7 +14,6 @@ export const newGame = name => {
   const sequence = randomSequence(SIZE);
   let key = "";
   return dispatch => {
-    dispatch(newGameRequestedAction());
     const gamesRef = database.ref('/games');
     key = gamesRef.push().key;
     gamesRef.push({
@@ -32,12 +31,6 @@ export const newGame = name => {
         dispatch(newGameRejectedAction());
       });
   }
-}
-
-const newGameRequestedAction = () => {
-  return {
-    type: 'ActionTypes.AddToInviteRequested'
-  };
 }
 
 const newGameRejectedAction = () => {
