@@ -1,6 +1,6 @@
 import { NEW_GAME } from '../actions/types';
 
-const initialState = {};
+const initialState = ["Game 1", "Game 2", "Game 3"];
 
 export const game = (state = initialState, action) => {
     switch (action.type) {

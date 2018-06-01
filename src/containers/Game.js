@@ -5,7 +5,8 @@ import * as numberActionCreators from '../actions/numbers';
 import App from '../App';
 
 const mapStateToProps = state => ({
-  numberData: state.numbers
+  numberData: state.numbers,
+  games: state.game
 });
 
 const mapDispatchToProps = dispatch => {
