@@ -1,11 +1,11 @@
-import { NEW_GAME } from '../actions/types';
+import { NEW_GAME, GAMES_ADDED } from '../actions/types';
 
-const initialState = ["Game 1", "Game 2", "Game 3"];
+const initialState = [];
 
 export const game = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_GAME:
-            return state;
+        case GAMES_ADDED:
+            return [...state, ...action.payload];
         default:
             return state;
     }

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as numberActionCreators from '../actions/numbers';
+import * as gameActionCreators from '../actions/game';
 
 import App from '../App';
 
@@ -11,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   let allActionCreators = Object.assign({},
-    numberActionCreators);
+    numberActionCreators, gameActionCreators);
   return bindActionCreators(allActionCreators, dispatch);
 };
 
