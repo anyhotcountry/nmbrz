@@ -4,9 +4,6 @@ import { NEW_GAME, GAMES_ADDED, SIZE } from '../actions/types';
 
 export const watchGamesAddedEvent = () => {
   return dispatch => {
-    database.ref('/games').on('value', (snap) => {
-      dispatch(gamesAddedAction(snap.val()));
-    });
     database.ref('/games').on('child_added', (snap) => {
       dispatch(gamesAddedAction([snap.val()]));
     });

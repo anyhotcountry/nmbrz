@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -13,18 +13,17 @@ import AddIcon from '@material-ui/icons/Add';
 const styles = theme => ({
   root: {
     width: '100%',
-    position: 'relative',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
   fab: {
-    position: 'absolute',
-    bottom: -theme.spacing.unit * 10,
+    position: 'fixed',
+    bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
   }
 });
 
-class GameList extends React.Component {
+class GameList extends Component {
   render() {
     const { games } = this.props;
     const { classes } = this.props;
@@ -48,8 +47,8 @@ class GameList extends React.Component {
           ))}
         </List>
         <Button variant="fab" color="secondary" className={classes.fab} onClick={this.props.newGame}>
-            <AddIcon />
-          </Button>
+          <AddIcon />
+        </Button>
       </div>
     );
   }
