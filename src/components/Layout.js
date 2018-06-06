@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import ErrorSnackBar from './ErrorSnackBar';
 
 const styles = {
   root: {
@@ -33,7 +34,7 @@ const Layout = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Title
+            NMBRZ
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

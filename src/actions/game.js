@@ -1,6 +1,6 @@
 import database, { TIMESTAMP } from './database';
 
-import { NEW_GAME, GAMES_ADDED, SIZE } from '../actions/types';
+import { NEW_GAME, GAMES_ADDED, SIZE, WATCH_GAME, JOIN_GAME, SHOW_ERROR } from '../actions/types';
 
 export const watchGamesAddedEvent = () => {
   return dispatch => {
@@ -35,6 +35,7 @@ export const newGame = name => {
       key,
       date: TIMESTAMP,
       sequence,
+      owner: "Chris",
       players: [
         { name: "Chris" }
       ]
@@ -48,9 +49,24 @@ export const newGame = name => {
   }
 }
 
+export const joinGame = key => {
+  return {
+    type: JOIN_GAME,
+    payload: key
+  };
+}
+
+export const watchGame = key => {
+  return {
+    type: WATCH_GAME,
+    payload: key
+  };
+}
+
 const newGameRejectedAction = () => {
   return {
-    type: 'ActionTypes.AddToInviteRejected'
+    type: SHOW_ERROR,
+    payload: 'Adding new game failed'
   }
 }
 
