@@ -9,10 +9,15 @@ const initialState = {
 export const auth = (state = initialState, action) => {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
-            return state;
+            return {
+                authenticated: !!action.payload,
+                id: action.payload ? action.payload.uid : null
+            }
         case SIGN_OUT_SUCCESS:
-            return state;
-        default:
+        return {
+            authenticated: false
+        }
+    default:
             return state;
     }
 }

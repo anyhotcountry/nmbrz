@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ErrorSnackBar from './ErrorSnackBar';
 
 const styles = {
   root: {
@@ -25,7 +24,7 @@ const styles = {
 };
 
 const Layout = (props) => {
-  const { classes } = props;
+  const { classes, signInWithGoogle, signOut, auth } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -36,7 +35,12 @@ const Layout = (props) => {
           <Typography variant="title" color="inherit" className={classes.flex}>
             NMBRZ
           </Typography>
-          <Button color="inherit">Login</Button>
+          {auth.authenticated ||
+            <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
+          }
+          {auth.authenticated &&
+            <Button color="inherit" onClick={signOut}>Logout</Button>
+          }
         </Toolbar>
       </AppBar>
       {props.children}

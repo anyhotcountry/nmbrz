@@ -9,11 +9,10 @@ const theme = createMuiTheme({});
 
 class App extends Component {
   render() {
-    const { classes } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Layout>
+        <Layout {...this.props} >
           <GameList {...this.props} />
           <ErrorSnackBar {...this.props} />
         </Layout>

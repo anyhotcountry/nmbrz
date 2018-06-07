@@ -1,4 +1,4 @@
-import { NEW_GAME, GAMES_ADDED } from '../actions/types';
+import { GAMES_ADDED } from '../actions/types';
 
 const initialState = [];
 
