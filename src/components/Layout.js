@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,29 +23,36 @@ const styles = {
   },
 };
 
-const Layout = (props) => {
-  const { classes, signInWithGoogle, signOut, auth } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            NMBRZ
+class Layout extends Component {
+  render() {
+    const { classes, signInWithGoogle, signOut, auth } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" className={classes.flex}>
+              NMBRZ
           </Typography>
-          {auth.authenticated ||
-            <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
-          }
-          {auth.authenticated &&
-            <Button color="inherit" onClick={signOut}>Logout</Button>
-          }
-        </Toolbar>
-      </AppBar>
-      {props.children}
-    </div>
-  );
+            {auth.authenticated ||
+              <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
+            }
+            {auth.authenticated &&
+              <Button color="inherit" onClick={signOut}>Logout</Button>
+            }
+          </Toolbar>
+        </AppBar>
+        {auth.authenticated && this.props.children}
+      </div>
+    );
+  }
+
+  componentDidMount() {
+    const { onAuthStateChanged } = this.props
+    onAuthStateChanged()
+  }
 }
 
 Layout.propTypes = {

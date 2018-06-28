@@ -40,7 +40,7 @@ export const signInWithGoogle = () => {
 }
 
 export const signInWithEmail = () => {
-    return authenticate(new firebase.auth.EmailAuthProvider());
+  return authenticate(new firebase.auth.EmailAuthProvider());
 }
 
 export const signInWithTwitter = () => {
@@ -49,15 +49,25 @@ export const signInWithTwitter = () => {
 
 
 export const signOut = () => {
-    return dispatch => {
-      firebaseAuth.signOut()
-        .then(() => dispatch(signOutSuccess()));
-    };
+  return dispatch => {
+    firebaseAuth.signOut()
+      .then(() => dispatch(signOutSuccess()));
+  };
+}
+
+export const onAuthStateChanged = () => {
+  return dispatch => {
+    firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(signInSuccess({ user }));
+      }
+    });
   }
-  
-  
-  const signOutSuccess = () => {
-    return {
-      type: SIGN_OUT_SUCCESS
-    };
-  }
+}
+
+
+const signOutSuccess = () => {
+  return {
+    type: SIGN_OUT_SUCCESS
+  };
+}
