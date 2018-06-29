@@ -54,8 +54,8 @@ class GameList extends Component {
   }
 
   componentDidMount() {
-    const { watchGamesAddedEvent } = this.props
-    watchGamesAddedEvent()
+    const { watchGamesAddedEvent } = this.props;
+    watchGamesAddedEvent();
   }
 }
 

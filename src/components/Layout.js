@@ -50,8 +50,8 @@ class Layout extends Component {
   }
 
   componentDidMount() {
-    const { onAuthStateChanged } = this.props
-    onAuthStateChanged()
+    const { onAuthStateChanged } = this.props;
+    onAuthStateChanged();
   }
 }
 
