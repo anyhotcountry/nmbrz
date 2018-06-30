@@ -1,4 +1,4 @@
-import database, { TIMESTAMP } from './database';
+import database, { TIMESTAMP, firebaseAuth } from './database';
 
 import { NEW_GAME, GAMES_ADDED, SIZE, WATCH_GAME, JOIN_GAME, SHOW_ERROR } from '../actions/types';
 
@@ -29,15 +29,17 @@ export const newGame = name => {
   const sequence = randomSequence(SIZE);
   let key = "";
   return dispatch => {
+    const { uid : userId, displayName  } = firebaseAuth.currentUser;
     const gamesRef = database.ref('/games');
     key = gamesRef.push().key;
     gamesRef.push({
       key,
       date: TIMESTAMP,
       sequence,
-      owner: "Chris",
+      ownerId: userId,
+      ownerName: displayName,
       players: [
-        { name: "Chris" }
+        { userId, displayName  }
       ]
     })
       .then(() => {

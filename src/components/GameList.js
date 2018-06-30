@@ -37,7 +37,7 @@ class GameList extends Component {
               className="listItem"
               onClick={watchGame(game.key)}
             >
-              <ListItemText primary={`Started by ${game.owner}`} secondary={"on " + new Date(game.date).toDateString()} />
+              <ListItemText primary={`Started by ${game.ownerName}`} secondary={"on " + new Date(game.date).toDateString()} />
               <ListItemSecondaryAction>
                 <IconButton aria-label="Join Game" onClick={joinGame(game.key)}>
                   <LaunchIcon />

@@ -2,16 +2,19 @@ import { SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS } from '../actions/types';
 
 const initialState = {
     authenticated: false,
-    user: null,
-    key: null
+    userId: null,
+    displayName: null,
+    photoURL: null
 };
 
 export const auth = (state = initialState, action) => {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
             return {
-                authenticated: !!action.payload,
-                id: action.payload ? action.payload.uid : null
+                authenticated: true,
+                userId: action.payload.uid,
+                displayName: action.payload.displayName,
+                photoURL: action.payload.photoURL
             }
         case SIGN_OUT_SUCCESS:
         return {

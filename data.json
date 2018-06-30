@@ -1,0 +1,140 @@
+{
+    "games": {
+        "-LGC9zzKB71o8DW74AVS": {
+            "date": 1530303086677,
+            "key": "-LGC9zzKB71o8DW74AVR",
+            "ownerId": "onmQvWhYwzQPd6Q4p3s9OrZnId43",
+            "ownerName": "Chris Maré",
+            "players": [
+                {
+                    "displayName": "Chris Maré",
+                    "userId": "onmQvWhYwzQPd6Q4p3s9OrZnId43"
+                }
+            ],
+            "sequence": [
+                16,
+                6,
+                12,
+                15,
+                2,
+                18,
+                7,
+                13,
+                5,
+                19,
+                9,
+                8,
+                14,
+                4,
+                17,
+                0,
+                1,
+                11,
+                3,
+                10
+            ]
+        },
+        "-LGCB8oSXD6fD_wHDHgf": {
+            "date": 1530303389082,
+            "key": "-LGCB8oQGUp7TaRD-pnV",
+            "ownerId": "onmQvWhYwzQPd6Q4p3s9OrZnId43",
+            "ownerName": "Chris Maré",
+            "players": [
+                {
+                    "displayName": "Chris Maré",
+                    "userId": "onmQvWhYwzQPd6Q4p3s9OrZnId43"
+                }
+            ],
+            "sequence": [
+                12,
+                0,
+                15,
+                8,
+                5,
+                11,
+                13,
+                2,
+                3,
+                14,
+                19,
+                10,
+                17,
+                7,
+                1,
+                4,
+                6,
+                16,
+                18,
+                9
+            ]
+        },
+        "-LGCB91NfvBYlheask7w": {
+            "date": 1530303389971,
+            "key": "-LGCB91NfvBYlheask7v",
+            "ownerId": "onmQvWhYwzQPd6Q4p3s9OrZnId43",
+            "ownerName": "Chris Maré",
+            "players": [
+                {
+                    "displayName": "Chris Maré",
+                    "userId": "onmQvWhYwzQPd6Q4p3s9OrZnId43"
+                }
+            ],
+            "sequence": [
+                6,
+                18,
+                15,
+                14,
+                2,
+                4,
+                10,
+                11,
+                5,
+                17,
+                16,
+                0,
+                7,
+                12,
+                9,
+                1,
+                13,
+                8,
+                3,
+                19
+            ]
+        },
+        "-LGCB99YFlIqAeWW_esd": {
+            "date": 1530303390492,
+            "key": "-LGCB99YFlIqAeWW_esc",
+            "ownerId": "onmQvWhYwzQPd6Q4p3s9OrZnId43",
+            "ownerName": "Chris Maré",
+            "players": [
+                {
+                    "displayName": "Chris Maré",
+                    "userId": "onmQvWhYwzQPd6Q4p3s9OrZnId43"
+                }
+            ],
+            "sequence": [
+                3,
+                12,
+                8,
+                1,
+                15,
+                2,
+                0,
+                9,
+                19,
+                16,
+                17,
+                11,
+                7,
+                14,
+                10,
+                6,
+                4,
+                5,
+                13,
+                18
+            ]
+        }
+    }
+}
